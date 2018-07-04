@@ -1,34 +1,45 @@
-1  fdisk -l
-    2  setfont /usr/share/kbd/consolefonts/cybercafe.fnt.gz -u cybercafe
-    3  timedatectl set-ntp true
-    4  timedatectl status
-    5  lsblk
-    6  mkfs.ext4 /dev/sda1
-    7  mkswap /dev/sda2
-    8  swapon /dev/sda2
-    9  mkfs.ext4 /dev/sda3
-   10  mount /dev/sda1 /mnt
-   11  mkdir /mnt/home
-   12  mount /dev/sda3 /mnt/home
-   13  vi /etc/pacman.d/mirrorlist
-   14  pacstrap /mnt base base-devel
-   15  pacman-key --init && pacman-key --populate archlinux
-   16  genfstab -L /mnt >> /mnt/etc/fstab
-   17  arch-chroot /mnt
-[root@arch-1 /]# 
-[root@arch-1 /]# 
-    1  ln -sf /usr/share/zoneinfo/US/Central /etc/localtime
-    2  hwclock --systohc --utc
-    3  echo LANG=en_US.UTF-8 > /etc/locale.conf
-    4  export LANG=en_US.UTF-8
-    5  vi /etc/locale.gen
-    6  locale-gen
-    7  echo arch-1 > /etc/hostname
-    8  vi /etc/pacman.conf
-    9  pacman -Syu
-   10  pacman -Sy
-   11  pacman -S grub-bios
-   12  vi /etc/vconsole.conf
-   13  grub-install --target=i386-pc /dev/sda
-   14  grub-mkconfig -o /boot/grub/grub.cfg
-----------
+# hw clock set to UTC
+# sda1 40G (root) / sda2 4G (swap) / sda3 remainder (home)
+fdisk -l
+#setfont /usr/share/kbd/consolefonts/cybercafe.fnt.gz -u cybercafe
+timedatectl set-ntp true
+#timedatectl status
+#lsblk
+mkfs.ext4 /dev/sda1
+mkswap /dev/sda2
+swapon /dev/sda2
+mkfs.ext4 /dev/sda3
+mount /dev/sda1 /mnt
+mkdir /mnt/home
+mount /dev/sda3 /mnt/home
+vi /etc/pacman.d/mirrorlist
+pacstrap /mnt base base-devel
+pacman-key --init && pacman-key --populate archlinux
+genfstab -L /mnt >> /mnt/etc/fstab
+arch-chroot /mnt
+[root@arch /]# 
+ln -sf /usr/share/zoneinfo/US/Central /etc/localtime
+hwclock --systohc --utc
+echo LANG=en_US.UTF-8 > /etc/locale.conf
+export LANG=en_US.UTF-8
+vi /etc/locale.gen
+locale-gen
+echo arch-1 > /etc/hostname
+vi /etc/pacman.conf #uncomment MULTILIB
+pacman -S grub-bios
+grub-install --target=i386-pc /dev/sda
+grub-mkconfig -o /boot/grub/grub.cfg
+#reboot here to HDD /dev/sda1
+#ip link set <if> up
+#lspci -vv -S <00:00.0>
+#dmesg |grep <kernel module>
+#systemctl enable --now dhcpcd@<device>.service
+useradd -m -g users -s /bin/bash clayton
+passwd clayton
+visudo
+pacman -S xorg-server xorg-xinit
+pacman -S nvidia lib32-nvidia-utils
+pacman -S ttf-liberation
+pacman -S steam
+pacman -S chromium
+pacman -S mate
