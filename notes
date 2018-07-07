@@ -1,10 +1,6 @@
 # hw clock set to UTC
 # sda1 40G (root) / sda2 4G (swap) / sda3 remainder (home)
-fdisk -l
-#setfont /usr/share/kbd/consolefonts/cybercafe.fnt.gz -u cybercafe
 timedatectl set-ntp true
-#timedatectl status
-#lsblk
 mkfs.ext4 /dev/sda1
 mkswap /dev/sda2
 swapon /dev/sda2
@@ -12,34 +8,33 @@ mkfs.ext4 /dev/sda3
 mount /dev/sda1 /mnt
 mkdir /mnt/home
 mount /dev/sda3 /mnt/home
-vi /etc/pacman.d/mirrorlist
-pacstrap /mnt base base-devel
+#vi /etc/pacman.d/mirrorlist
 pacman-key --init && pacman-key --populate archlinux
+pacstrap /mnt base base-devel
 genfstab -L /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
-[root@arch /]# 
 ln -sf /usr/share/zoneinfo/US/Central /etc/localtime
 hwclock --systohc --utc
 echo LANG=en_US.UTF-8 > /etc/locale.conf
 export LANG=en_US.UTF-8
-vi /etc/locale.gen
+#vi /etc/locale.gen
 locale-gen
 echo arch-1 > /etc/hostname
-vi /etc/pacman.conf #uncomment MULTILIB
+#vi /etc/pacman.conf #uncomment MULTILIB
+pacman -Syu
 pacman -S grub-bios
 grub-install --target=i386-pc /dev/sda
+#vi /etc/default/grub #GFXMODE=1920x1080x24 GFXPAYLOAD_LINUX=1920x1080
 grub-mkconfig -o /boot/grub/grub.cfg
-#reboot here to HDD /dev/sda1
+# reboot to /dev/sda1
 #ip link set <if> up
-#lspci -vv -S <00:00.0>
-#dmesg |grep <kernel module>
-#systemctl enable --now dhcpcd@<device>.service
+systemctl enable --now dhcpcd@<device>.service
 useradd -m -g users -s /bin/bash clayton
 passwd clayton
 visudo
-pacman -S xorg-server xorg-xinit
-pacman -S nvidia lib32-nvidia-utils
-pacman -S ttf-liberation
-pacman -S steam
-pacman -S chromium
-pacman -S mate
+pacman-key --init && pacman-key --populate archlinux
+pacman -S git nvidia lib32-nvidia-utils xorg-xinit lxqt oxygen-icons xscreensaver ttf-liberation steam chromium
+cp /etc/skel/.bash_profile /home/clayton/.bash_profile
+printf "if [[ ! \$DISPLAY && \$XDG_VTNR -eq 1 ]]; then\n  exec startx\nfi\n" >> /home/clayton/.bash_profile
+cp /etc/X11/xinit/xinitrc /home/clayton/.xinitrc
+#sudo vi home/clayton/.xinitrc
