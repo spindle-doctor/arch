@@ -9,7 +9,7 @@ mount /dev/sda1 /mnt
 mkdir /mnt/home
 mount /dev/sda3 /mnt/home
 #vi /etc/pacman.d/mirrorlist
-pacman-key --init && pacman-key --populate archlinux
+pacman-key --init && pacman-key --populate archlinux && pacman-key --refresh
 pacstrap /mnt base base-devel
 genfstab -L /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
@@ -32,8 +32,8 @@ systemctl enable --now dhcpcd@<device>.service
 useradd -m -g users -s /bin/bash clayton
 passwd clayton
 visudo
-pacman-key --init && pacman-key --populate archlinux
-pacman -S git nvidia lib32-nvidia-utils xorg-xinit lxqt oxygen-icons xscreensaver ttf-liberation steam chromium
+pacman-key --init && pacman-key --populate archlinux && pacman-key --refresh
+pacman -S git nvidia lib32-nvidia-utils xorg-xinit lxqt xscreensaver ttf-liberation steam chromium leafpad
 cp /etc/skel/.bash_profile /home/clayton/.bash_profile
 printf "if [[ ! \$DISPLAY && \$XDG_VTNR -eq 1 ]]; then\n  exec startx\nfi\n" >> /home/clayton/.bash_profile
 cp /etc/X11/xinit/xinitrc /home/clayton/.xinitrc
