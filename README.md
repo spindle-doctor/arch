@@ -1,8 +1,8 @@
 # arch
 ### My Arch notes
 
-Created this as a collection of installion commands, trying to 
-keep the file small to keep it handy when using from command 
+Created this as a collection of installation commands, trying 
+to keep the file small and handy when using from the command 
 line.  It isn't a script but more a checklist to be used with 
 the shell during install.
 
@@ -31,14 +31,15 @@ desktop starting from a unformatted hard drive in about 45 minutes.
 1. Set hardware clock to GMT
 2. Create arch linux boot media
 3. Create disk partitions:
-   - 40G type 83h /dev/sda1 root /
-   - 4G type 82h /dev/sda2 swap
-   - 80G typ 83h /dev/sda3 /home
+   - 40G `type 83h /dev/sda1 root /`
+   - 4G `type 82h /dev/sda2 swap`
+   - 80G `typ 83h /dev/sda3 /home`
 4. Boot to arch install media
-5. Use following command to get this file
+5. A command can then be used to get this file—  
  `curl https://raw.githubusercontent.com/spindle-doctor/arch/master/notes`
-6. Step through each line, entering each command as listed
-7. "#" indicates something extra is needed or it may be a comment
+6. I usually create a local copy and a copy in the new `/`
+7. Step through each line, entering each command as listed
+8. "`#`" indicates something extra is needed or it may be a comment
 
 ##### Further reading
 [Arch Linux Installation Guide](https://wiki.archlinux.org/index.php/installation_guide)
