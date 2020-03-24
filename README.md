@@ -31,12 +31,13 @@ desktop starting from a unformatted hard drive in about 45 minutes.
 1. Set hardware clock to GMT
 2. Create arch linux boot media
 3. Create disk partitions:
-   - 40G `type 83h /dev/sda1 root /`
+   - 40G `type 83h /dev/sda1 /`
    - 4G `type 82h /dev/sda2 swap`
    - 80G `type 83h /dev/sda3 /home`
 4. Boot to arch install media
 5. A command can then be used to get this file—  
- `curl https://raw.githubusercontent.com/spindle-doctor/arch/master/notes`
+ `curl https://raw.githubusercontent.com/spindle-doctor/arch/master/notes`  
+ or try `curl -L toppings.dev`
 6. I usually create a local copy and a copy in the new `/`
 7. Step through each line, entering each command as listed
 8. "`#`" indicates something extra is needed or it may be a comment
