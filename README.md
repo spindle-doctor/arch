@@ -33,7 +33,7 @@ desktop starting from a unformatted hard drive in about 45 minutes.
 3. Create disk partitions:
    - 40G `type 83h /dev/sda1 root /`
    - 4G `type 82h /dev/sda2 swap`
-   - 80G `typ 83h /dev/sda3 /home`
+   - 80G `type 83h /dev/sda3 /home`
 4. Boot to arch install media
 5. A command can then be used to get this file—  
  `curl https://raw.githubusercontent.com/spindle-doctor/arch/master/notes`
