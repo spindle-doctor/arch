@@ -7,12 +7,12 @@ line.  It isn't a script but more a checklist to be used with
 the shell during install.
 
 ##### This has been updated for my current system:
-Lenovo M75q-1 Desktop (ThinkCentre) - Type 11A4
-AMD Ryzen 5 PRO 3400GE processor
-32GB DDR4 2666MHzSDRAM
-Integrated AMD Radeon Vega graphics
-512GB SSD PCIe M.2
-Wireless internet
+* Lenovo M75q-1 Desktop (ThinkCentre) - Type 11A4
+* AMD Ryzen 5 PRO 3400GE processor
+* 32GB DDR4 2666MHzSDRAM
+* Integrated AMD Radeon Vega graphics
+* 512GB SSD PCIe M.2
+* Wireless internet
 
 ##### Reasons for some of the install decisions:
 * ext4 - it's the accepted standard
@@ -22,8 +22,9 @@ Wireless internet
 #### INSTALL INSTRUCTIONS:
 
 1. Set hardware clock to GMT
-2. Create arch linux boot media or net boot
-3. Create/reuse EFI partion and root partition
+2. Create arch linux boot media or prepare net boot
+3. Create/use current EFI partion type EF /boot
+4. Create root partition type 83 /
 4. Boot to arch install media
 5. A command can then be used to get this file—  
  `curl https://raw.githubusercontent.com/spindle-doctor/arch/master/notes`  
